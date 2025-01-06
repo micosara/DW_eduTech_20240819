@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Location-Mapper">
+	<select id="selectSiList" resultType="str">
+		select distinct si
+		from location
+		order by si asc		
+	</select>
+	
+	<select id="selectGuList" resultType="str">
+		select distinct gu
+		from location
+		where si = #{si} and gu is not null
+	</select>
+	
+	<select id="selectDongList" resultType="loc">
+		select dong, district_code
+		from location
+		where gu = #{gu} and dong is not null
+	</select>	
+	
+	
+	<select id="selectLocationByCode" parameterType="str" resultType="loc">
+		select *
+		from location
+		where district_code = #{district_code}
+	</select>
+</mapper>
